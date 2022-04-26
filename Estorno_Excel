@@ -1,0 +1,170 @@
+Private Sub Gerar_estorno_Click()
+Sheets("Estornos").Select
+    C = Worksheets("Estornos").Cells(Worksheets("Estornos").Rows.Count, 3).End(xlUp).Row - 16
+    D = Worksheets("Estornos").Cells(Worksheets("Estornos").Rows.Count, 3).End(xlUp).Row - 13
+    E = Worksheets("Estornos").Cells(Worksheets("Estornos").Rows.Count, 3).End(xlUp).Row - 2
+    F = Worksheets("Estornos").Cells(Worksheets("Estornos").Rows.Count, 3).End(xlUp).Row - 11
+    G = Worksheets("Estornos").Cells(Worksheets("Estornos").Rows.Count, 3).End(xlUp).Row - 15
+    
+    If ISS.Value = True Then
+        Cells(C, 11).Value = Val_box.Value
+        Cells(C, 11).Value = Cells(C, 11).Value * 1.05
+    Else
+        Cells(C, 11).Value = Val_box.Value
+        End If
+    
+   Cells(D, 7).Value = Reserva_box.Value
+   Cells(D, 2).Value = UH_box.Value
+   Cells(E, 3).Value = Recep_box.Value
+   Cells(F, 3).Value = Obs_Box.Value
+   Cells(G, 11).Value = Data_box.Value
+   
+    
+Dim Pict
+    Dim ImgFileFormat As String
+    Dim Celula As String
+    Celula = "A21"    ' celula que será inserido a imagem
+    ImgFileFormat = "Image Files JPG (*.jpg),*.jpg, Image Files PNG (*.png),*.jpg, Image Files GIF (*.gif),*.gif, Image Files BMP (*.bmp),*.bmp"
+    
+    'Pict = Application.GetOpenFilename(ImgFileFormat, False, False, MultiSelect:=True)
+    
+    Pict = Application.GetOpenFilename(ImgFileFormat, False, False, False, True)
+    
+    'If Pict = False Then End
+    
+    If IsArray(Pict) Then 'IF ARRAY
+    
+        If UBound(Pict) <= 22 Then 'IF I
+        
+            j = 1
+    
+            For i = LBound(Pict) To UBound(Pict) 'FOR I
+            
+                Select Case i 'Cobertura de 22 imagens
+                
+                    Case 1 To 3
+                        'IMAGEM: largura = 4 colunas; altura= 11 linhas
+                        Application.ActiveSheet.Shapes.AddPicture Pict(i), False, True, Range(Celula).Left, _
+                        Range(Celula).Top, Range(Celula).Width * 6, Range(Celula).Height * 26
+                        
+                        j = j + 4
+                        Celula = Chr(64 + j) & "95"
+                                       
+                    
+                    Case 4 To 6
+                        If Mid(Celula, 1, 1) = "M" Then
+                            j = 1
+                            Celula = Chr(64 + j) & "107"
+                        End If
+                        'IMAGEM: largura = 6 colunas; altura= 11 linhas
+                        Application.ActiveSheet.Shapes.AddPicture Pict(i), False, True, Range(Celula).Left, _
+                        Range(Celula).Top, Range(Celula).Width * 4, Range(Celula).Height * 11
+                        
+                        j = j + 4
+                        Celula = Chr(64 + j) & "107"
+                        
+                        
+                        Case 7 To 9
+                        If Mid(Celula, 1, 1) = "M" Then
+                            j = 1
+                            Celula = Chr(64 + j) & "119"
+                        End If
+                        'IMAGEM: largura = 4 colunas; altura= 11 linhas
+                        Application.ActiveSheet.Shapes.AddPicture Pict(i), False, True, Range(Celula).Left, _
+                        Range(Celula).Top, Range(Celula).Width * 4, Range(Celula).Height * 11
+                        
+                        j = j + 4
+                        Celula = Chr(64 + j) & "119"
+                    
+                    
+                     Case 10 To 12
+                        If Mid(Celula, 1, 1) = "M" Then
+                            j = 1
+                            Celula = Chr(64 + j) & "131"
+                        End If
+                        'IMAGEM: largura = 4 colunas; altura= 11 linhas
+                        Application.ActiveSheet.Shapes.AddPicture Pict(i), False, True, Range(Celula).Left, _
+                        Range(Celula).Top, Range(Celula).Width * 4, Range(Celula).Height * 11
+                        
+                        j = j + 4
+                        Celula = Chr(64 + j) & "131"
+                      
+                      
+                      Case 13 To 15
+                        If Mid(Celula, 1, 1) = "M" Then
+                            j = 1
+                            Celula = Chr(64 + j) & "143"
+                        End If
+                        'IMAGEM: largura = 4 colunas; altura= 11 linhas
+                        Application.ActiveSheet.Shapes.AddPicture Pict(i), False, True, Range(Celula).Left, _
+                        Range(Celula).Top, Range(Celula).Width * 4, Range(Celula).Height * 11
+                        
+                        j = j + 4
+                        Celula = Chr(64 + j) & "143"
+                        
+                        
+                        Case 16 To 18
+                        If Mid(Celula, 1, 1) = "M" Then
+                            j = 1
+                            Celula = Chr(64 + j) & "155"
+                        End If
+                        'IMAGEM: largura = 4 colunas; altura= 11 linhas
+                        Application.ActiveSheet.Shapes.AddPicture Pict(i), False, True, Range(Celula).Left, _
+                        Range(Celula).Top, Range(Celula).Width * 4, Range(Celula).Height * 11
+                        
+                        j = j + 4
+                        Celula = Chr(64 + j) & "155"
+                        
+                        
+                        Case 19 To 21
+                        If Mid(Celula, 1, 1) = "M" Then
+                            j = 1
+                            Celula = Chr(64 + j) & "167"
+                        End If
+                        'IMAGEM: largura = 4 colunas; altura= 11 linhas
+                        Application.ActiveSheet.Shapes.AddPicture Pict(i), False, True, Range(Celula).Left, _
+                        Range(Celula).Top, Range(Celula).Width * 4, Range(Celula).Height * 11
+                        
+                        j = j + 4
+                        Celula = Chr(64 + j) & "167"
+                        
+                         
+
+                End Select
+
+            Next i 'FOR I
+        
+        Else 'IF I
+        
+            MsgBox "Selecionar apenas 22 imagens"
+           
+            
+            End
+        
+        End If 'IF I
+    
+    End If 'IF ARRAY
+
+Application.Dialogs(xlDialogPrint).Show
+
+   Cells(C, 11).Value = ""
+   Cells(D, 7).Value = ""
+   Cells(D, 2).Value = ""
+   Cells(E, 3).Value = ""
+   Cells(F, 3).Value = ""
+   Cells(G, 11).Value = ""
+   
+
+    Dim xPicRg As Range
+    Dim xPic As Picture
+    Dim xRg As Range
+    Application.ScreenUpdating = False
+    Set xRg = Range("A18:K46")
+    For Each xPic In ActiveSheet.Pictures
+        Set xPicRg = Range(xPic.TopLeftCell.Address & ":" & xPic.BottomRightCell.Address)
+        If Not Intersect(xRg, xPicRg) Is Nothing Then xPic.Delete
+    Next
+    Application.ScreenUpdating = True
+
+Sheets("Cad").Select
+End Sub
