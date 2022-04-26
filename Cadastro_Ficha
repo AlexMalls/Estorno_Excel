@@ -1,0 +1,1194 @@
+Private Sub Cadastro_but_Click()
+
+    Dim iTotalLinhas As Integer
+    iTotalLinhas = Sheets("Banco").Cells(Rows.Count, 1).End(xlUp).Row + 1
+    Tot_box.Value = iTotalLinhas
+    
+
+
+If Nome_box.Value <> "" And Cod_box <> "" Then
+        
+    Worksheets("banco").Activate
+    
+    Set Procurar = Cells.Find(What:=Alter_box.Value, After:=ActiveCell, _
+      LookIn:=xlValues, LookAt:=xlWhole, SearchOrder:=xlByRows, _
+      SearchDirection:=xlNext, MatchCase:=False)
+      
+     If (Procurar Is Nothing) Then
+      MsgBox Nome_box.Value
+      MsgBox Alter_box.Value
+      End If
+      
+ 
+    If Not (Procurar Is Nothing) Then
+          
+          ' ALTERAÇÃO DE CADASTRO
+          
+       Linha = Sheets("Banco").Cells.Find(Procurar, LookAt:=xlWhole).Row
+
+            If Linha <> 1 Then
+       
+            Sheets("Banco").Cells(Linha, 2).Value = Nome_box.Value
+            Sheets("Banco").Cells(Linha, 3).Value = Cod_box.Value
+            Sheets("Banco").Cells(Linha, 4).Value = Cost_box.Value
+            Sheets("Banco").Cells(Linha, 5).Value = Data_box.Value
+            Sheets("Banco").Cells(Linha, 6).Value = Ano_box.Value
+            Sheets("Banco").Cells(Linha, 7).Value = Colecao_box.Value
+            Sheets("Banco").Cells(Linha, 8).Value = Val_box.Value
+            Sheets("Banco").Cells(Linha, 9).Value = Image_box.Value
+            Sheets("Banco").Cells(Linha, 44).Value = Image2_box.Value
+
+            Sheets("Banco").Cells(Linha, 10).Value = ""
+            Sheets("Banco").Cells(Linha, 11).Value = ""
+            Sheets("Banco").Cells(Linha, 12).Value = ""
+            Sheets("Banco").Cells(Linha, 13).Value = ""
+    
+            If Corte_check = True Then
+                Sheets("Banco").Cells(Linha, 10).Value = "X"
+             End If
+            If Mod_check = True Then
+                Sheets("Banco").Cells(Linha, 11).Value = "X"
+             End If
+            If Pilot_check = True Then
+              Sheets("Banco").Cells(Linha, 12).Value = "X"
+             End If
+            If Digit_check = True Then
+             Sheets("Banco").Cells(Linha, 13).Value = "X"
+             End If
+             
+             MsgBox "Cadastro Atualizado"
+            
+            Else
+
+                ' NOVO CADASTRO
+                
+
+             Dim lUltima As Long
+    
+
+    
+               If IsNumeric(Sheets("Banco").Cells(iTotalLinhas - 1, 1).Value) Then
+                  lUltima = Sheets("Banco").Cells(iTotalLinhas - 1, 1).Value + 1
+               Else
+                  lUltima = 1
+               End If
+    
+    
+                With frmCadastroStudents
+                  Sheets("Banco").Cells(Tot_box.Value, 1).Value = lUltima
+                  Sheets("Banco").Cells(Tot_box.Value, 2).Value = Nome_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 3).Value = Cod_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 4).Value = Cost_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 5).Value = Data_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 6).Value = Ano_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 7).Value = Colecao_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 8).Value = Val_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 9).Value = Image_box.Value
+                  
+                    'BLOCO DE TAMANHOS E CORES
+                         'TAMANHOS 1 Linha
+                  Sheets("Banco").Cells(Tot_box.Value, 14).Value = Cor1_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 15).Value = Tam_pc1_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 16).Value = Tam_mc1_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 17).Value = Tam_gc1_box.Value
+                         'TAMANHOS 2 Linha
+                  Sheets("Banco").Cells(Tot_box.Value, 18).Value = Cor2_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 19).Value = Tam_pc2_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 20).Value = Tam_mc2_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 21).Value = Tam_gc2_box.Value
+                         'TAMANHOS 3 Linha
+                  Sheets("Banco").Cells(Tot_box.Value, 22).Value = Cor3_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 23).Value = Tam_pc3_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 24).Value = Tam_mc3_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 25).Value = Tam_gc3_box.Value
+                         'TAMANHOS 4 Linha
+                  Sheets("Banco").Cells(Tot_box.Value, 26).Value = Cor4_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 27).Value = Tam_pc4_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 28).Value = Tam_mc4_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 29).Value = Tam_gc4_box.Value
+                         'TAMANHOS 5 Linha
+                  Sheets("Banco").Cells(Tot_box.Value, 30).Value = Cor5_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 31).Value = Tam_pc5_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 32).Value = Tam_mc5_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 33).Value = Tam_gc5_box.Value
+                       
+                         'AVIAMENTOS E CASEADO
+                        
+                  Sheets("Banco").Cells(Tot_box.Value, 34).Value = Quantav1_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 35).Value = Av1_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 36).Value = Quantav2_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 37).Value = Av2_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 38).Value = Quantav3_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 39).Value = Av3_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 40).Value = Quantav4_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 41).Value = Av4_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 42).Value = Quantav5_box.Value
+                  Sheets("Banco").Cells(Tot_box.Value, 43).Value = Av5_box.Value
+                  
+    
+             If Corte_check = True Then
+                  Sheets("Banco").Cells(Tot_box.Value, 10).Value = "X"
+              End If
+             If Mod_check = True Then
+                  Sheets("Banco").Cells(Tot_box.Value, 11).Value = "X"
+              End If
+             If Pilot_check = True Then
+                  Sheets("Banco").Cells(Tot_box.Value, 12).Value = "X"
+              End If
+             If Digit_check = True Then
+                  Sheets("Banco").Cells(Tot_box.Value, 13).Value = "X"
+             End If
+                 End With
+                 
+                 MsgBox "Cadastro Realizado"
+                 
+            End If
+            
+        
+   
+    
+    End If
+        
+     ' LIMPANDO
+ 
+  'IDENTEIFICAÇÃO
+Nome_box.Value = ""
+Cod_box.Value = ""
+Val_box.Value = ""
+Cost_box.Value = ""
+Alter_box.Value = ""
+Tot_box.Value = ""
+   
+    'ANO E DATA
+Dim MyDate, MyYear, MyDay, MyMonth
+MyDate = Date
+MyYear = Year(MyDate)
+MyDay = Day(MyDate)
+MyMonth = Month(MyDate)
+
+Data_box.Value = MyDate
+Ano_box.Value = MyYear
+
+
+If MyMonth = 1 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 2 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 3 And MyDay < 22 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 3 And MyDay > 21 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 4 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 5 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 6 And MyDay < 22 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 6 And MyDay > 21 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 7 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 8 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 9 And MyDay < 24 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 9 And MyDay > 23 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 10 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 11 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 12 And MyDay < 22 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 12 And MyDay > 21 Then
+    Colecao_box.Value = "Verão"
+End If
+   
+   
+    'BLOCO DE TAMANHOS E CORES
+     'TAMANHOS 1 Linha
+Cor1_box.Value = ""
+Tam_pc1_box.Value = ""
+Tam_mc1_box.Value = ""
+Tam_gc1_box.Value = ""
+     'TAMANHOS 2 Linha
+Cor2_box.Value = ""
+Tam_pc2_box.Value = ""
+Tam_mc2_box.Value = ""
+Tam_gc2_box.Value = ""
+     'TAMANHOS 3 Linha
+Cor3_box.Value = ""
+Tam_pc3_box.Value = ""
+Tam_mc3_box.Value = ""
+Tam_gc3_box.Value = ""
+     'TAMANHOS 4 Linha
+Cor4_box.Value = ""
+Tam_pc4_box.Value = ""
+Tam_mc4_box.Value = ""
+Tam_gc4_box.Value = ""
+     'TAMANHOS 5 Linha
+Cor5_box.Value = ""
+Tam_pc5_box.Value = ""
+Tam_mc5_box.Value = ""
+Tam_gc5_box.Value = ""
+   
+   
+     'AVIAMENTOS E CASEADO
+
+Valcase_box = ""
+    
+Quantav1_box.Value = ""
+Av1_box.Value = ""
+Quantav2_box.Value = ""
+Av2_box.Value = ""
+Quantav3_box.Value = ""
+Av3_box.Value = ""
+Quantav4_box.Value = ""
+Av4_box.Value = ""
+Quantav5_box.Value = ""
+Av5_box.Value = ""
+    
+
+     'Check Boxes
+Corte_check = False
+Mod_check = False
+Pilot_check = False
+Digit_check = False
+
+
+ ' IMAGEM
+
+Me.Image1.Picture = Nothing
+Image_box = ""
+Me.Image2.Picture = Nothing
+Image2_box = ""
+    
+Else
+
+ MsgBox "É Necessário preencher NOME e CODIGO"
+
+End If
+
+ 
+
+
+End Sub
+
+Private Sub CommandButton1_Click()
+ Dim Local_Imagem As String
+    
+    Local_Imagem = Application.GetOpenFilename(filefilter:="Picture Files,*.jpg")
+            
+            Me.Image1.Picture = LoadPicture(Local_Imagem)
+            Me.Image1.PictureSizeMode = fmPictureSizeModeZoom
+            
+            Image_box = Local_Imagem
+            
+            Call CommandButton6_Click
+            
+End Sub
+
+
+Private Sub CommandButton2_Click()
+
+    Corte_check = False
+    Mod_check = False
+    Pilot_check = False
+    Digit_check = False
+ 
+If ComboBox1.Value <> "" Then
+    
+    Nome_box.Value = ComboBox1.Value
+    Alter_box.Value = Nome_box.Value
+    
+End If
+
+If Nome_box.Value <> "" Then
+  nome = Nome_box.Value
+ Linha = Sheets("Banco").Cells.Find(nome, LookAt:=xlWhole).Row
+ 
+ElseIf Cod_box.Value <> "" Then
+ Cod = Cod_box.Value
+ Linha = Sheets("Banco").Cells.Find(Cod).Row
+
+Else
+
+    MsgBox "Nenhum item selecionado no ID"
+    
+    Exit Sub
+    
+End If
+    
+        
+       Nome_box.Value = Sheets("Banco").Cells(Linha, 2).Value
+       Cod_box.Value = Sheets("Banco").Cells(Linha, 3).Value
+       Cost_box.Value = Sheets("Banco").Cells(Linha, 4).Value
+       Data_box.Value = Sheets("Banco").Cells(Linha, 5).Value
+       Ano_box.Value = Sheets("Banco").Cells(Linha, 6).Value
+       Colecao_box.Value = Sheets("Banco").Cells(Linha, 7).Value
+       Val_box.Value = Sheets("Banco").Cells(Linha, 8).Value
+       Range("A1").Select
+
+       
+       Local_Imagem = Sheets("Banco").Cells(Linha, 9).Value
+            
+            Me.Image1.Picture = LoadPicture(Local_Imagem)
+            Me.Image1.PictureSizeMode = fmPictureSizeModeZoom
+            
+            Image_box = Local_Imagem
+            
+    
+        Local_Imagem = Sheets("Banco").Cells(Linha, 44).Value
+            
+            Me.Image2.Picture = LoadPicture(Local_Imagem)
+            Me.Image2.PictureSizeMode = fmPictureSizeModeZoom
+            
+            Image2_box = Local_Imagem
+       
+       
+    If Sheets("Banco").Cells(Linha, 10) <> "" Then
+        Corte_check = True
+        End If
+    If Sheets("Banco").Cells(Linha, 11) <> "" Then
+        Mod_check = True
+        End If
+    If Sheets("Banco").Cells(Linha, 12) <> "" Then
+        Pilot_check = True
+        End If
+    If Sheets("Banco").Cells(Linha, 13) <> "" Then
+        Digit_check = True
+        End If
+       
+           
+           'BLOCO DE TAMANHOS E CORES
+         'TAMANHOS 1 Linha
+    Cor1_box.Value = Sheets("Banco").Cells(Linha, 14).Value
+    Tam_pc1_box.Value = Sheets("Banco").Cells(Linha, 15).Value
+    Tam_mc1_box.Value = Sheets("Banco").Cells(Linha, 16).Value
+    Tam_gc1_box.Value = Sheets("Banco").Cells(Linha, 17).Value
+         'TAMANHOS 2 Linha
+    Cor2_box.Value = Sheets("Banco").Cells(Linha, 18).Value
+    Tam_pc2_box.Value = Sheets("Banco").Cells(Linha, 19).Value
+    Tam_mc2_box.Value = Sheets("Banco").Cells(Linha, 20).Value
+    Tam_gc2_box.Value = Sheets("Banco").Cells(Linha, 21).Value
+         'TAMANHOS 3 Linha
+    Cor3_box.Value = Sheets("Banco").Cells(Linha, 22).Value
+    Tam_pc3_box.Value = Sheets("Banco").Cells(Linha, 23).Value
+    Tam_mc3_box.Value = Sheets("Banco").Cells(Linha, 24).Value
+    Tam_gc3_box.Value = Sheets("Banco").Cells(Linha, 25).Value
+         'TAMANHOS 4 Linha
+    Cor4_box.Value = Sheets("Banco").Cells(Linha, 26).Value
+    Tam_pc4_box.Value = Sheets("Banco").Cells(Linha, 27).Value
+    Tam_mc4_box.Value = Sheets("Banco").Cells(Linha, 28).Value
+    Tam_gc4_box.Value = Sheets("Banco").Cells(Linha, 29).Value
+         'TAMANHOS 5 Linha
+    Cor5_box.Value = Sheets("Banco").Cells(Linha, 30).Value
+    Tam_pc5_box.Value = Sheets("Banco").Cells(Linha, 31).Value
+    Tam_mc5_box.Value = Sheets("Banco").Cells(Linha, 32).Value
+    Tam_gc5_box.Value = Sheets("Banco").Cells(Linha, 33).Value
+       
+       
+         'AVIAMENTOS E CASEADO
+        
+    Quantav1_box.Value = Sheets("Banco").Cells(Linha, 34).Value
+    Av1_box.Value = Sheets("Banco").Cells(Linha, 35).Value
+    Quantav2_box.Value = Sheets("Banco").Cells(Linha, 36).Value
+    Av2_box.Value = Sheets("Banco").Cells(Linha, 37).Value
+    Quantav3_box.Value = Sheets("Banco").Cells(Linha, 38).Value
+    Av3_box.Value = Sheets("Banco").Cells(Linha, 39).Value
+    Quantav4_box.Value = Sheets("Banco").Cells(Linha, 40).Value
+    Av4_box.Value = Sheets("Banco").Cells(Linha, 41).Value
+    Quantav5_box.Value = Sheets("Banco").Cells(Linha, 42).Value
+    Av5_box.Value = Sheets("Banco").Cells(Linha, 43).Value
+           
+       
+       
+       
+    Call CommandButton6_Click
+
+End Sub
+
+Private Sub CommandButton3_Click()
+
+If ComboBox1.Value <> "" And Nome_box.Value = "" Then
+    
+    ' SUB 2
+        
+    Corte_check = False
+    Mod_check = False
+    Pilot_check = False
+    Digit_check = False
+ 
+If ComboBox1.Value <> "" Then
+    
+    Nome_box.Value = ComboBox1.Value
+    
+End If
+
+If Nome_box.Value <> "" Then
+  nome = Nome_box.Value
+ Linha = Sheets("Banco").Cells.Find(nome).Row
+ 
+ElseIf Cod_box.Value <> "" Then
+ Cod = Cod_box.Value
+ Linha = Sheets("Banco").Cells.Find(Cod).Row
+
+Else
+
+    Lista.Show
+    
+    Exit Sub
+    
+End If
+
+       Nome_box.Value = Sheets("Banco").Cells(Linha, 2).Value
+       Cod_box.Value = Sheets("Banco").Cells(Linha, 3).Value
+       Cost_box.Value = Sheets("Banco").Cells(Linha, 4).Value
+       Data_box.Value = Sheets("Banco").Cells(Linha, 5).Value
+       Ano_box.Value = Sheets("Banco").Cells(Linha, 6).Value
+       Colecao_box.Value = Sheets("Banco").Cells(Linha, 7).Value
+       Val_box.Value = Sheets("Banco").Cells(Linha, 8).Value
+       
+    If Sheets("Banco").Cells(Linha, 10) <> "" Then
+        Corte_check = True
+        End If
+    If Sheets("Banco").Cells(Linha, 11) <> "" Then
+        Mod_check = True
+        End If
+    If Sheets("Banco").Cells(Linha, 12) <> "" Then
+        Pilot_check = True
+        End If
+    If Sheets("Banco").Cells(Linha, 13) <> "" Then
+        Digit_check = True
+        End If
+        
+    ' SUB 2 END
+    
+Worksheets("Fichacost").Activate
+
+    a = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 6
+    B = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 22
+    C = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 21
+    d = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 4
+    
+    H = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 13
+    i = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 12
+    j = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 11
+    K = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 10
+    L = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 9
+    m = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 14
+    N = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row
+    
+    O = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 19
+    
+    
+    'IDENTEIFICAÇÃO
+   Cells(C, 8).Value = Nome_box.Value
+   Cells(C, 2).Value = Cod_box.Value
+   Cells(d, 6).Value = Val_box.Value
+   Cells(N, 8).Value = Cost_box.Value
+   
+    'ANO E DATA
+   Cells(B, 2).Value = Colecao_box.Value
+   Cells(B, 5).Value = Ano_box.Value
+   Cells(B, 10).Value = Data_box.Value
+   
+   
+    'BLOCO DE TAMANHOS E CORES
+     'TAMANHOS 1 Linha
+   Cells(H, 1).Value = Cor1_box.Value
+   Cells(H, 2).Value = Tam_pc1_box.Value
+   Cells(H, 4).Value = Tam_mc1_box.Value
+   Cells(H, 6).Value = Tam_gc1_box.Value
+     'TAMANHOS 2 Linha
+   Cells(i, 1).Value = Cor2_box.Value
+   Cells(i, 2).Value = Tam_pc2_box.Value
+   Cells(i, 4).Value = Tam_mc2_box.Value
+   Cells(i, 6).Value = Tam_gc2_box.Value
+     'TAMANHOS 3 Linha
+   Cells(j, 1).Value = Cor3_box.Value
+   Cells(j, 2).Value = Tam_pc3_box.Value
+   Cells(j, 4).Value = Tam_mc3_box.Value
+   Cells(j, 6).Value = Tam_gc3_box.Value
+     'TAMANHOS 4 Linha
+   Cells(K, 1).Value = Cor1_box.Value
+   Cells(K, 2).Value = Tam_pc4_box.Value
+   Cells(K, 4).Value = Tam_mc4_box.Value
+   Cells(K, 6).Value = Tam_gc4_box.Value
+     'TAMANHOS 5 Linha
+   Cells(L, 1).Value = Cor5_box.Value
+   Cells(L, 2).Value = Tam_pc5_box.Value
+   Cells(L, 4).Value = Tam_mc5_box.Value
+   Cells(L, 6).Value = Tam_gc5_box.Value
+   
+   
+     'AVIAMENTOS E CASEADO
+    If Valcase_box = "" Then
+        Valcase_box = "0.20"
+    End If
+    Cells(a, 9).Value = Valcase_box.Value
+    
+    Cells(H, 9).Value = Quantav1_box.Value
+    Cells(H, 10).Value = Av1_box.Value
+    Cells(i, 9).Value = Quantav2_box.Value
+    Cells(i, 10).Value = Av2_box.Value
+    Cells(j, 9).Value = Quantav3_box.Value
+    Cells(j, 10).Value = Av3_box.Value
+    Cells(K, 9).Value = Quantav4_box.Value
+    Cells(K, 10).Value = Av4_box.Value
+    Cells(L, 9).Value = Quantav5_box.Value
+    Cells(L, 10).Value = Av5_box.Value
+    
+
+     'Check Boxes
+    If Corte_check = True Then
+        Cells(O, 2).Value = "X"
+        End If
+    If Mod_check = True Then
+        Cells(O, 4).Value = "X"
+        End If
+    If Pilot_check = True Then
+        Cells(O, 6).Value = "X"
+        End If
+    If Digit_check = True Then
+        Cells(O, 8).Value = "X"
+        End If
+        
+   ' IMAGEM
+   
+
+   
+   ' IMAGEM
+
+
+    
+    Call CommandButton7_Click
+
+
+        
+' LIMPAR
+
+ 
+   Cells(C, 8).Value = ""
+   Cells(C, 2).Value = ""
+   Cells(d, 6).Value = ""
+   Cells(N, 8).Value = ""
+
+   Cells(B, 2).Value = ""
+   Cells(B, 5).Value = ""
+   Cells(B, 10).Value = ""
+   
+   Cells(H, 1).Value = ""
+   Cells(H, 2).Value = ""
+   Cells(H, 4).Value = ""
+   Cells(H, 6).Value = ""
+
+   Cells(i, 1).Value = ""
+   Cells(i, 2).Value = ""
+   Cells(i, 4).Value = ""
+   Cells(i, 6).Value = ""
+
+   Cells(j, 1).Value = ""
+   Cells(j, 2).Value = ""
+   Cells(j, 4).Value = ""
+   Cells(j, 6).Value = ""
+
+   Cells(K, 1).Value = ""
+   Cells(K, 2).Value = ""
+   Cells(K, 4).Value = ""
+   Cells(K, 6).Value = ""
+
+   Cells(L, 1).Value = ""
+   Cells(L, 2).Value = ""
+   Cells(L, 4).Value = ""
+   Cells(L, 6).Value = ""
+   
+    Cells(a, 9).Value = ""
+    
+    Cells(H, 9).Value = ""
+    Cells(H, 10).Value = ""
+    Cells(i, 9).Value = ""
+    Cells(i, 10).Value = ""
+    Cells(j, 9).Value = ""
+    Cells(j, 10).Value = ""
+    Cells(K, 9).Value = ""
+    Cells(K, 10).Value = ""
+    Cells(L, 9).Value = ""
+    Cells(L, 10).Value = ""
+    Cells(O, 2).Value = ""
+    Cells(O, 4).Value = ""
+    Cells(O, 6).Value = ""
+    Cells(O, 8).Value = ""
+Else
+
+    Worksheets("Fichacost").Activate
+
+    a = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 6
+    B = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 22
+    C = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 21
+    d = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 4
+    
+    H = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 13
+    i = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 12
+    j = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 11
+    K = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 10
+    L = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 9
+    m = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 14
+    N = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row
+    
+    O = Worksheets("Fichacost").Cells(Worksheets("Fichacost").Rows.Count, 3).End(xlUp).Row - 19
+    
+    
+    'IDENTEIFICAÇÃO
+   Cells(C, 8).Value = Nome_box.Value
+   Cells(C, 2).Value = Cod_box.Value
+   Cells(d, 6).Value = Val_box.Value
+   Cells(N, 8).Value = Cost_box.Value
+   
+    'ANO E DATA
+   Cells(B, 2).Value = Colecao_box.Value
+   Cells(B, 5).Value = Ano_box.Value
+   Cells(B, 10).Value = Data_box.Value
+   
+   
+    'BLOCO DE TAMANHOS E CORES
+     'TAMANHOS 1 Linha
+   Cells(H, 1).Value = Cor1_box.Value
+   Cells(H, 2).Value = Tam_pc1_box.Value
+   Cells(H, 4).Value = Tam_mc1_box.Value
+   Cells(H, 6).Value = Tam_gc1_box.Value
+     'TAMANHOS 2 Linha
+   Cells(i, 1).Value = Cor2_box.Value
+   Cells(i, 2).Value = Tam_pc2_box.Value
+   Cells(i, 4).Value = Tam_mc2_box.Value
+   Cells(i, 6).Value = Tam_gc2_box.Value
+     'TAMANHOS 3 Linha
+   Cells(j, 1).Value = Cor3_box.Value
+   Cells(j, 2).Value = Tam_pc3_box.Value
+   Cells(j, 4).Value = Tam_mc3_box.Value
+   Cells(j, 6).Value = Tam_gc3_box.Value
+     'TAMANHOS 4 Linha
+   Cells(K, 1).Value = Cor1_box.Value
+   Cells(K, 2).Value = Tam_pc4_box.Value
+   Cells(K, 4).Value = Tam_mc4_box.Value
+   Cells(K, 6).Value = Tam_gc4_box.Value
+     'TAMANHOS 5 Linha
+   Cells(L, 1).Value = Cor5_box.Value
+   Cells(L, 2).Value = Tam_pc5_box.Value
+   Cells(L, 4).Value = Tam_mc5_box.Value
+   Cells(L, 6).Value = Tam_gc5_box.Value
+   
+   
+     'AVIAMENTOS E CASEADO
+    If Valcase_box = "" Then
+        Valcase_box = "0.20"
+    End If
+    Cells(a, 9).Value = Valcase_box.Value
+    
+    Cells(H, 9).Value = Quantav1_box.Value
+    Cells(H, 10).Value = Av1_box.Value
+    Cells(i, 9).Value = Quantav2_box.Value
+    Cells(i, 10).Value = Av2_box.Value
+    Cells(j, 9).Value = Quantav3_box.Value
+    Cells(j, 10).Value = Av3_box.Value
+    Cells(K, 9).Value = Quantav4_box.Value
+    Cells(K, 10).Value = Av4_box.Value
+    Cells(L, 9).Value = Quantav5_box.Value
+    Cells(L, 10).Value = Av5_box.Value
+    
+
+     'Check Boxes
+    If Corte_check = True Then
+        Cells(O, 2).Value = "X"
+        End If
+    If Mod_check = True Then
+        Cells(O, 4).Value = "X"
+        End If
+    If Pilot_check = True Then
+        Cells(O, 6).Value = "X"
+        End If
+    If Digit_check = True Then
+        Cells(O, 8).Value = "X"
+        End If
+        
+        
+Application.Dialogs(xlDialogPrint).Show
+
+        
+' LIMPAR
+ 
+   Cells(C, 8).Value = ""
+   Cells(C, 2).Value = ""
+   Cells(d, 6).Value = ""
+   Cells(N, 8).Value = ""
+
+   Cells(B, 2).Value = ""
+   Cells(B, 5).Value = ""
+   Cells(B, 10).Value = ""
+   
+   Cells(H, 1).Value = ""
+   Cells(H, 2).Value = ""
+   Cells(H, 4).Value = ""
+   Cells(H, 6).Value = ""
+
+   Cells(i, 1).Value = ""
+   Cells(i, 2).Value = ""
+   Cells(i, 4).Value = ""
+   Cells(i, 6).Value = ""
+
+   Cells(j, 1).Value = ""
+   Cells(j, 2).Value = ""
+   Cells(j, 4).Value = ""
+   Cells(j, 6).Value = ""
+
+   Cells(K, 1).Value = ""
+   Cells(K, 2).Value = ""
+   Cells(K, 4).Value = ""
+   Cells(K, 6).Value = ""
+
+   Cells(L, 1).Value = ""
+   Cells(L, 2).Value = ""
+   Cells(L, 4).Value = ""
+   Cells(L, 6).Value = ""
+   
+    Cells(a, 9).Value = ""
+    
+    Cells(H, 9).Value = ""
+    Cells(H, 10).Value = ""
+    Cells(i, 9).Value = ""
+    Cells(i, 10).Value = ""
+    Cells(j, 9).Value = ""
+    Cells(j, 10).Value = ""
+    Cells(K, 9).Value = ""
+    Cells(K, 10).Value = ""
+    Cells(L, 9).Value = ""
+    Cells(L, 10).Value = ""
+    Cells(O, 2).Value = ""
+    Cells(O, 4).Value = ""
+    Cells(O, 6).Value = ""
+    Cells(O, 8).Value = ""
+        
+End If
+
+
+End Sub
+
+Private Sub txt_Change()
+
+End Sub
+
+Private Sub CommandButton4_Click()
+
+  'IDENTEIFICAÇÃO
+Nome_box.Value = ""
+Cod_box.Value = ""
+Val_box.Value = ""
+Cost_box.Value = ""
+Alter_box.Value = ""
+   
+    'ANO E DATA
+Dim MyDate, MyYear, MyDay, MyMonth
+MyDate = Date
+MyYear = Year(MyDate)
+MyDay = Day(MyDate)
+MyMonth = Month(MyDate)
+
+Data_box.Value = MyDate
+Ano_box.Value = MyYear
+
+
+If MyMonth = 1 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 2 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 3 And MyDay < 22 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 3 And MyDay > 21 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 4 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 5 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 6 And MyDay < 22 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 6 And MyDay > 21 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 7 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 8 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 9 And MyDay < 24 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 9 And MyDay > 23 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 10 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 11 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 12 And MyDay < 22 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 12 And MyDay > 21 Then
+    Colecao_box.Value = "Verão"
+End If
+   
+   
+    'BLOCO DE TAMANHOS E CORES
+     'TAMANHOS 1 Linha
+Cor1_box.Value = ""
+Tam_pc1_box.Value = ""
+Tam_mc1_box.Value = ""
+Tam_gc1_box.Value = ""
+     'TAMANHOS 2 Linha
+Cor2_box.Value = ""
+Tam_pc2_box.Value = ""
+Tam_mc2_box.Value = ""
+Tam_gc2_box.Value = ""
+     'TAMANHOS 3 Linha
+Cor3_box.Value = ""
+Tam_pc3_box.Value = ""
+Tam_mc3_box.Value = ""
+Tam_gc3_box.Value = ""
+     'TAMANHOS 4 Linha
+Cor4_box.Value = ""
+Tam_pc4_box.Value = ""
+Tam_mc4_box.Value = ""
+Tam_gc4_box.Value = ""
+     'TAMANHOS 5 Linha
+Cor5_box.Value = ""
+Tam_pc5_box.Value = ""
+Tam_mc5_box.Value = ""
+Tam_gc5_box.Value = ""
+   
+   
+     'AVIAMENTOS E CASEADO
+
+Valcase_box = ""
+    
+Quantav1_box.Value = ""
+Av1_box.Value = ""
+Quantav2_box.Value = ""
+Av2_box.Value = ""
+Quantav3_box.Value = ""
+Av3_box.Value = ""
+Quantav4_box.Value = ""
+Av4_box.Value = ""
+Quantav5_box.Value = ""
+Av5_box.Value = ""
+    
+
+     'Check Boxes
+Corte_check = False
+Mod_check = False
+Pilot_check = False
+Digit_check = False
+
+
+ ' IMAGEM
+
+Me.Image1.Picture = Nothing
+Image_box = ""
+Me.Image2.Picture = Nothing
+Image2_box = ""
+
+End Sub
+
+Private Sub CommandButton5_Click()
+
+    nome = Alter_box.Value
+    If nome <> "" Then
+        Linha = Sheets("Banco").Cells.Find(nome, LookAt:=xlWhole).Row
+        Coluna = Sheets("Banco").Cells.Find(nome, LookAt:=xlWhole).Column
+        Worksheets("Banco").Activate
+        Cells(Linha, Coluna).Select
+        Selection.EntireRow.Delete
+        
+    MsgBox "Cadastro Excluido"
+        
+        Alter_box.Value = ""
+        
+        ' LIMPANDO
+ 
+  'IDENTEIFICAÇÃO
+Nome_box.Value = ""
+Cod_box.Value = ""
+Val_box.Value = ""
+Cost_box.Value = ""
+Alter_box.Value = ""
+Tot_box.Value = ""
+   
+    'ANO E DATA
+Dim MyDate, MyYear, MyDay, MyMonth
+MyDate = Date
+MyYear = Year(MyDate)
+MyDay = Day(MyDate)
+MyMonth = Month(MyDate)
+
+Data_box.Value = MyDate
+Ano_box.Value = MyYear
+
+
+If MyMonth = 1 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 2 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 3 And MyDay < 22 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 3 And MyDay > 21 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 4 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 5 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 6 And MyDay < 22 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 6 And MyDay > 21 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 7 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 8 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 9 And MyDay < 24 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 9 And MyDay > 23 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 10 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 11 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 12 And MyDay < 22 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 12 And MyDay > 21 Then
+    Colecao_box.Value = "Verão"
+End If
+   
+   
+    'BLOCO DE TAMANHOS E CORES
+     'TAMANHOS 1 Linha
+Cor1_box.Value = ""
+Tam_pc1_box.Value = ""
+Tam_mc1_box.Value = ""
+Tam_gc1_box.Value = ""
+     'TAMANHOS 2 Linha
+Cor2_box.Value = ""
+Tam_pc2_box.Value = ""
+Tam_mc2_box.Value = ""
+Tam_gc2_box.Value = ""
+     'TAMANHOS 3 Linha
+Cor3_box.Value = ""
+Tam_pc3_box.Value = ""
+Tam_mc3_box.Value = ""
+Tam_gc3_box.Value = ""
+     'TAMANHOS 4 Linha
+Cor1_box.Value = ""
+Tam_pc4_box.Value = ""
+Tam_mc4_box.Value = ""
+Tam_gc4_box.Value = ""
+     'TAMANHOS 5 Linha
+Cor5_box.Value = ""
+Tam_pc5_box.Value = ""
+Tam_mc5_box.Value = ""
+Tam_gc5_box.Value = ""
+   
+   
+     'AVIAMENTOS E CASEADO
+
+Valcase_box = ""
+    
+Quantav1_box.Value = ""
+Av1_box.Value = ""
+Quantav2_box.Value = ""
+Av2_box.Value = ""
+Quantav3_box.Value = ""
+Av3_box.Value = ""
+Quantav4_box.Value = ""
+Av4_box.Value = ""
+Quantav5_box.Value = ""
+Av5_box.Value = ""
+    
+
+     'Check Boxes
+Corte_check = False
+Mod_check = False
+Pilot_check = False
+Digit_check = False
+
+ ' IMAGEM
+
+Me.Image1.Picture = Nothing
+Image_box = ""
+Me.Image2.Picture = Nothing
+Image2_box = ""
+    
+    Else
+    
+    MsgBox "Nenhum Cadastro Selecionado"
+    
+    End If
+    
+    Worksheets("Cad").Activate
+
+
+End Sub
+
+Private Sub CommandButton6_Click()
+
+    Worksheets("Fichacost").Activate
+     
+    Dim imgPath As String
+    Dim WS As Worksheet
+    imgPath = Image_box.Value
+    
+    If VBA.Dir(imgPath) = "" Then Exit Sub
+    
+    Set WS = Excel.Application.ThisWorkbook.ActiveSheet
+    
+    With WS
+    .OLEObjects("Image1").Object.Picture = LoadPicture("")
+    .OLEObjects("Image1").Object.Picture = LoadPicture(imgPath)
+    .OLEObjects("Image1").Object.PictureSizeMode = 3
+    End With
+    
+    imgPath = Image2_box.Value
+    
+    If VBA.Dir(imgPath) = "" Then Exit Sub
+    
+    Set WS = Excel.Application.ThisWorkbook.ActiveSheet
+    
+    With WS
+    .OLEObjects("Image2").Object.Picture = LoadPicture("")
+    .OLEObjects("Image2").Object.Picture = LoadPicture(imgPath)
+    .OLEObjects("Image2").Object.PictureSizeMode = 3
+    End With
+
+End Sub
+
+Private Sub CommandButton7_Click()
+
+Application.Dialogs(xlDialogPrint).Show
+
+End Sub
+
+Private Sub CommandButton8_Click()
+
+
+End Sub
+
+
+Private Sub Image1_Click()
+
+End Sub
+
+Private Sub UserForm_Initialize()
+
+iTotalLinhas = Sheets("Banco").Cells(Rows.Count, 1).End(xlUp).Row
+
+ComboBox1.ColumnCount = 2
+ComboBox1.RowSource = "Banco!B2:C100"
+ComboBox1.Font.Size = 10
+ComboBox1.Font.Name = "Verdana"
+
+Dim MyDate, MyYear, MyDay, MyMonth
+MyDate = Date
+MyYear = Year(MyDate)
+MyDay = Day(MyDate)
+MyMonth = Month(MyDate)
+
+Data_box.Value = MyDate
+Ano_box.Value = MyYear
+
+
+If MyMonth = 1 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 2 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 3 And MyDay < 22 Then
+    Colecao_box.Value = "Verão"
+End If
+If MyMonth = 3 And MyDay > 21 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 4 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 5 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 6 And MyDay < 22 Then
+    Colecao_box.Value = "Outono"
+End If
+If MyMonth = 6 And MyDay > 21 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 7 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 8 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 9 And MyDay < 24 Then
+    Colecao_box.Value = "Inverno"
+End If
+If MyMonth = 9 And MyDay > 23 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 10 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 11 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 12 And MyDay < 22 Then
+    Colecao_box.Value = "Primavera"
+End If
+If MyMonth = 12 And MyDay > 21 Then
+    Colecao_box.Value = "Verão"
+End If
+
+End Sub
